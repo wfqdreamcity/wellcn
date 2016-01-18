@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META http-equiv="X-UA-Compatible" content="IE=9" > </META>
+<title>个人中心</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="../Public/css/layout_1yangCar.css" type="text/css" rel="stylesheet" />
+    <link href="../Public/css/demo.css" type="text/css" rel="stylesheet" /> 
+    <link href="../Public/css/layout3.0.css" type="text/css" rel="stylesheet" /> 
+    <style type="text/css">
+    
+    html {
+  background-color: #fff;
+}
+
+    </style>
+    <script <script type="text/javascript" src="../Public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../Public/js/buyCar.js"></script>
+<script>
+$(function(){
+	$(".li_s6").click(function(){
+		var tel =$("input[name=tel]").val();
+		var username =$("input[name=username]").val();
+		var address =$("input[name=address]").val();
+		var passwd =$("input[name=passwd]").val();
+		var school_id =$(".Number option:selected").val();
+		var schoolname =$(".Number option:selected").text();
+		var sex =$(".sex option:selected").val();
+		if(tel==''){
+			alert('请输入手机号!');
+		}else if(username==''){
+			alert('请输昵称');
+		}else if(address==''){
+			alert('请输入详细地址');
+		}else{
+			$.post("updataUserInfo",{tel:tel,username:username,address:address,passwd:passwd,school_id:school_id,schoolname:schoolname,sex:sex},
+			function(data){
+				console.log(data);
+				if(data=='1'){
+					window.location="web_root/userwx/index";
+				}else{
+					alert('保存失败,请稍后重试!');
+				}
+			})
+		}
+		
+	})
+})	  
+	
+</script>
+    </head>
+
+    <body>
+
+<!--header-->
+
+<div class="Header_Three0">
+  <ul>
+    <li class="left_Three0"><a href="javascript:history.go(-1)"><img src="../Public/images/order_02.png" /></a></li>
+    <li class="middle_Three0">
+      <p>个人信息修改</p>
+    </li>
+    <li style="clear:both"></li>
+  </ul>
+ </div>
+<!--/header--> 
+
+<!--bodyer--> 
+<div class="order_1" >
+  <div class="box">
+    <div style="position:relative;">
+      <div class="details2_tab2">
+        <ul>
+		  <li class="li_s3">
+			<select name="school"  class="Number" style="width:95%;height:200%;background-color:#fff">
+				<volist name="school" id="vo">
+					<if condition="$vo['id'] eq $user_info['school']">
+						<option value="{$vo.id}" selected>{$vo.title}</option>
+					<else />
+						<option value="{$vo.id}">{$vo.title}</option>
+					</if>
+				</volist>
+			</select>
+          </li>
+          <li class="li_s3"><span>昵称：</span>
+            <input type="text" name="username" placeholder="输入昵称" value="{$user_info.username}" maxlength="11">
+          </li>
+		  <li class="li_s3"> <span>手机号：</span>
+            <input type="text" name="tel" placeholder="输入手机号码" value="{$user_info.mobile}" maxlength="11">
+          </li>
+		  <li class="li_s3"> <span>详细地址：</span>
+            <input type="text" name="address" placeholder="输入详细地址" value="{$user_info.address}" maxlength="11">
+          </li>
+		  <li class="li_s3">
+			<select name="sex"  class="sex" style="width:95%;height:200%;background-color:#fff">
+				<if condition="$user_info.sex eq 1">
+				<option value="1" selected>男生</option>
+				<option value="0">女生</option>
+				<else />
+				<option value="1">男生</option>
+				<option value="0" selected>女生</option>
+				</if>
+			</select>
+          </li>
+        
+		  <li  class="li_s3"> <span>密码：</span>
+			<input type="text" name="passwd" placeholder="若想修改密码填写此项" maxlength="20">
+		  </li>
+             <!--
+              <li  class="li_s5">
+                 <input id="btnSendCode" type="button" value="注册" onclick="sendMessage()" />
+              </li>-->
+               <li  class="li_s6">
+                <input type="button" name="" value="保存" />
+              </li>
+              
+              
+             
+            <li class="clears"> <!--<p class="tishi">输入正确的手机号码，点击发送验证码按钮并输入后即可登录。</p>--></li>
+        </ul>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<!--/bodyer--> 
+<!--footer3-->
+<!--
+<div class="footer2" id="footer2"><a href="tel:4000111919"><img src="images/footer.png" /></a></div>
+-->
+<!--/footer3-->
+
+</body>
+</html>

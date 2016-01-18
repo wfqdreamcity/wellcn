@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>帮帮达</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta content="校园助手_贴心的私人助理" name="description" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" size="72x72" href="../Public/images/animated_favicon.gif" />
+<link rel="apple-touch-icon" size="114x114" href="../Public/images/animated_favicon.gif" />
+<link rel="shortcut icon" href="../Public/images/animated_favicon.gif" />
+<link href="../Public/css/demo.css" type="text/css" rel="stylesheet" />
+<link href="../Public/css/layout3.0.css" type="text/css" rel="stylesheet" />
+
+<style type="text/css">
+.right_Three1 {
+	width: 20%;
+	height: auto;
+	float: left;
+	padding: 3% 0;
+}
+.right_Three1 p {
+	height: 30px;
+	line-height: 30px;
+	width: 95%;
+	text-align: right;
+	color: #fff;
+}
+.right_Three1 a {
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+}
+li {list-style-type:none;}
+
+.button{
+  font-size: 1em;
+  width: 45%;
+  padding: 5px 0px;
+  margin-left:3%;
+  float:left;
+  border: none;
+  background-color: #f9a115;
+  color: #fff;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+<!--header-->
+<div class="Header_Three0">
+  <ul>
+    <li class="left_Three0"><a href="javascript:history.go(-1)" class="cd-logo left_Three0" style="padding: 0% 0;"><img src="../Public/images/order_02.png" alt="Logo"></a></li>
+    <li class="middle_Three0">
+      <p>个人中心</p>
+    </li>
+    <li style="clear:both"></li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="../Public/3d/js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="../Public/3d/js/main.js"></script> 
+<!--/header--> 
+
+<!--bodyer-->
+<div class="oRder_Three0">
+  <div class="choose_wrap">
+    <p class="choose_wrap_p4">绑定账号: {$user.account}</p>
+	<div style="clear:both"></div>
+  </div>
+</div> 
+<div style="clear:both"></div>
+<div class="oRderBodyer_Three0">
+  <div class="chooseBodyer_wrap">
+		<p class="m_taocan_tit">个人信息</p>
+		<div class="m_taocan_cont">
+        <ul class="u_taocan_items">
+			<li>姓名:{$user.username}</li>
+			<li>联系电话:{$user.mobile}</li>
+			<li>所属学校:{$user.school_name}</li>
+        </ul>
+    </div>
+	<a href="web_root/index/user/logout"><input class="button" type="button" name="" value="退出" /></a>
+	<a href="web_root/index/user/updateUserInfoIndex"><input class="button" type="button" name="" value="编辑" /></a>
+	</div>
+</div>
+<br/>
+<?php 
+if($_SESSION['user']['is_post']=='1'){
+?>
+<div style="clear:both"></div>
+<div class="oRder_Three0">
+  <div class="choose_wrap">
+    <p class="choose_wrap_p4">附加功能</p>
+    <a href="web_root/index/user/addOrderIndex" class="choose_wrap_p5"></a>
+	<a href="web_root/index/index"><input class="button" type="button" name="" value="我要配送" /></a>
+	<div style="clear:both"></div>
+  </div>
+</div> 
+<?php }?>
+<!--/bodyer-->
+<script type="text/javascript" src="../Public/js/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/js/buyCar.js"></script>
+</body>
+</html>

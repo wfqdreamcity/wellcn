@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>帮帮达</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta content="校园助手_贴心的私人助理" name="description" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" size="72x72" href="../Public/images/animated_favicon.gif" />
+<link rel="apple-touch-icon" size="114x114" href="../Public/images/animated_favicon.gif" />
+<link rel="shortcut icon" href="../Public/images/animated_favicon.gif" />
+<link href="../Public/css/demo.css" type="text/css" rel="stylesheet" />
+<link href="../Public/css/layout3.0.css" type="text/css" rel="stylesheet" />
+
+<style type="text/css">
+.right_Three1 {
+	width: 20%;
+	height: auto;
+	float: left;
+	padding: 3% 0;
+}
+.right_Three1 p {
+	height: 30px;
+	line-height: 30px;
+	width: 95%;
+	text-align: right;
+	color: #fff;
+}
+.right_Three1 a {
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+}
+li {list-style-type:none;}
+
+.button{
+  font-size: 1em;
+  width: 45%;
+  padding: 5px 0px;
+  margin-left:3%;
+  float:left;
+  border: none;
+  background-color: #f9a115;
+  color: #fff;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+<!--header-->
+<div class="Header_Three0">
+  <ul>
+    <li class="left_Three0"><a href="javascript:history.go(-1)" class="cd-logo left_Three0" style="padding: 0% 0;"><img src="../Public/images/order_02.png" alt="Logo"></a></li>
+    <li class="middle_Three0">
+      <p>个人中心</p>
+    </li>
+    <li style="clear:both"></li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="../Public/3d/js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="../Public/3d/js/main.js"></script> 
+<!--/header--> 
+
+<!--bodyer-->
+<div class="oRder_Three0">
+  <div class="choose_wrap">
+    <p class="choose_wrap_p4">我要下单</p>
+    <a href="web_root/index/user/addOrderIndex" class="choose_wrap_p5"><img src="../Public/images/order_11.png" height="100%" /></a>
+	<div style="clear:both"></div>
+  </div>
+</div>  
+<div class="oRderBodyer_Three0">
+  <div class="chooseBodyer_wrap">
+		<p class="m_taocan_tit">我的订单</p>
+		<div class="m_taocan_cont">
+        <ul class="u_taocan_items">
+		   <volist name="myorders" id="vo">
+           <li>
+				<a class="LiBgImg-8 boderUp">
+				<div style=" width:84%; padding-left:16%">
+					   <span class="u_taocan_item_tit" style=" width:60%">{$vo.createtime|date="Y-m-d H:i:s",###}</span>
+                       <span class="u_taocan_item_tit" style=" width:60%">{$vo.user_name}
+                       <!--增加的标识2个-->
+                       &nbsp;&nbsp;<em style=" background-color:#448aca; padding:0 3%; font-size:12px;color:#fff;">状态:</em>               
+                       </span>     
+                       <span class="u_taocan_item_price2" style=" width:30%;text-align:right;">
+                                  <i><?php echo $status1[$vo['status']];?></i>
+                       </span>
+                       <span class="u_taocan_item_cont" style=" width:100%">商家:{$vo.restaurant_name}</span>
+                       <span class="u_taocan_item_cont" style=" width:100%">详情地址:{$vo.address}</span>
+					   <if condition="($vo.status neq 1) and ($vo.status neq 4)">
+					   <span class="u_taocan_item_tit" style=" width:60%">派送员:{$vo.postman_name}
+                       </span>     
+                       <span class="u_taocan_item_price2" style=" width:20%;text-align:right;">
+                                  <i>{$vo.postman_name_mobile}</i>
+                       </span>
+					   </if>
+					   <if condition="$vo.status eq 2">
+					   <span class="u_taocan_item_tit orders_comfirm" style="width:60%;color: #DF2B2B;" data-id="{$vo.id}">确认收货</span> 
+					   </if>
+                       <div style="clear:both"></div>
+                 </div>      
+                </a>
+            </li>
+			</volist>
+           
+        </ul>
+		<div style="clear:both"></div>
+		<div class="loading" data-page="1" style="text-align:center;margin:0 auto;border: 1px solid #C8C8C8;height:35px;"><span>加载更多>></span></div>
+		<div class="loading_end" style="display:none;text-align:center;margin:0 auto;"><span>没有更多数据</span></div>
+		</div>
+	</div>
+</div>
+
+<!--/bodyer-->
+<script type="text/javascript" src="../Public/js/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/js/buyCar.js"></script>
+<script>
+$(function(){
+	$(".loading").click(function(){
+		var obj1 =$(this);
+		var page =obj1.attr("data-page");
+		$.post("web_root/index/userwx/getMyObtainList",{page:page},function(obj){
+			var result =obj.result;//返回状态
+			if(result=='1'){
+				var data =obj.info;//返回信息
+				var page1 =obj.page;//返回信息
+				$(".u_taocan_items").append(data);
+				obj1.attr("data-page",page1);
+			}else{
+				$(".loading").hide();
+				$(".loading_end").show();
+			}
+		})
+	})
+})
+</script>
+<script>
+//确认收货处理
+$(function(){
+	$(document).on("click",".orders_comfirm",function(){
+		var obj =$(this);
+		var order_id =obj.attr("data-id");
+		console.log(order_id);
+		$.post("web_root/index/userwx/comfirm",{order_id:order_id},function(data){
+			if(data="ok"){
+				obj.remove();
+			}
+		})
+	})
+})
+</script>
+</body>
+</html>

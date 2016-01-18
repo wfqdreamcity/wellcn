@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>帮帮达</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta content="校园助手_贴心的私人助理" name="description" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" size="72x72" href="../Public/images/animated_favicon.gif" />
+<link rel="apple-touch-icon" size="114x114" href="../Public/images/animated_favicon.gif" />
+<link rel="shortcut icon" href="../Public/images/animated_favicon.gif" />
+<link href="../Public/css/demo.css" type="text/css" rel="stylesheet" />
+<link href="../Public/css/layout3.0.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+.raido {
+	width:20% !important;
+}
+.li_s3 {
+  margin: 5% auto;
+  background-color: #fff;
+  position: relative;
+  padding: 2% 3%;
+  width: 80%;
+  border: 1px solid #dedede;
+}
+.li_s3 input {
+  font-size: 1em;
+  width: 70%;
+  padding: 5px 0px;
+  border: none;
+  line-height: normal;
+  line-height: 22px\9;
+}
+.li_s6 {
+  margin: 2% auto;
+  background-color: #f9a115;
+  padding: 2%;
+  border-radius: 4px;
+  width: 40%;
+  margin-right: 1%;
+  margin-left: 1%;
+  float: left;
+}
+.li_s6 input {
+  font-size: 1em;
+  width: 100%;
+  padding: 5px 0px;
+  border: none;
+  background-color: #f9a115;
+  color: #fff;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<!--header-->
+<div class="Header_Three0">
+  <ul>
+    <li class="left_Three0"><a href="javascript:history.go(-1)"><img src="../Public/images/order_02.png" /></a></li>
+    <li class="middle_Three0">
+      <p>我要下单</p>
+    </li>
+    <li style="clear:both"></li>
+  </ul>
+</div>
+<!--/header--> 
+
+<!--bodyer-->
+<!--
+<div class="oRder_Three0">
+  <div class="choose_wrap"> 
+    <p class="choose_wrap_p4">我要下单</p>
+    <a href="#" class="choose_wrap_p5"><img src="../Public/images/order_11.png" height="100%" /></a> 
+    <div style="clear:both"></div>
+  </div>
+</div>
+-->
+<div class="oRderBodyer_Three0">
+  <div class="chooseBodyer_wrap">
+    <p class="m_taocan_tit">服务类型</p>
+    <div class="m_taocan_cont">
+        <ul class="u_taocan_items">
+			<volist name="option" id="vo" key="k">
+			<li class="raido">
+				<if condition="$k eq 1">
+				<input type="radio" name="service" value="{$vo.value}" data-name="{$vo.title}" checked /> {$vo.title}
+				<else />
+				<input type="radio" name="service" value="{$vo.value}" data-name="{$vo.title}" /> {$vo.title}
+				</if>
+            </li>
+			</volist>
+        </ul>
+    </div>
+	<div style="clear:both"></div>
+	<p class="m_taocan_tit">选择商户</p>
+    <div class="m_taocan_cont">
+        <ul class="u_taocan_items">
+			<volist name="restaurant" id="vo" key="k">
+			<li class="raido">
+				<if condition="$k eq 1">
+				<input type="radio" name="restaurant" value="{$vo.id}" data-name="{$vo.title}" checked /> {$vo.title}
+				<else />
+				<input type="radio" name="restaurant" value="{$vo.id}" data-name="{$vo.title}" /> {$vo.title}
+				</if>
+            </li>
+			</volist>
+        </ul>
+    </div>
+	<div style="clear:both"></div>
+	<p class="m_taocan_tit">选择地址</p>
+    <div class="m_taocan_cont">
+        <ul class="u_taocan_items">
+			<volist name="address" id="vo" key="k">
+			<li>
+				<if condition="$k eq 1">
+				<a data-id="{$vo.school}" data-name="{$vo.address}" data-username="{$vo.name}" data-mobile="{$vo.mobile}" data-type="{$vo.type}"  class="LiBgImg-7 boderDown">
+				<else />
+				<a data-id="{$vo.school}" data-name="{$vo.address}" data-username="{$vo.name}" data-mobile="{$vo.mobile}" data-type="{$vo.type}" class="LiBgImg-7 boderUp">
+				</if>
+				<div style=" width:95%; padding-left:16%">
+                       <span class="u_taocan_item_tit" style=" width:80%">{$vo.schoolname}
+                       <!--增加的标识2个-->
+					   <!--
+                       &nbsp;&nbsp;<em style=" background-color:#448aca; padding:0 3%; font-size:12px;color:#fff;">电话:</em>               
+                       <em style=" background-color:#ff0000; padding:0 3%; font-size:12px;color:#fff;">抢疯了</em>-->
+                       </span> 
+					   <span class="u_taocan_item_cont" style=" width:50%">联系人:&nbsp;&nbsp;{$vo.name} ({$vo.typedes})</span>					   
+                       <span class="u_taocan_item_price2" style=" width:35%;text-align:right;">
+                                  <i>{$vo.mobile}</i>
+                       </span>
+                       <span class="u_taocan_item_cont" style=" width:100%">详情地址:&nbsp;&nbsp;{$vo.address}</span>
+                       <span class="u_taocan_item_price" style=" width:0%;text-align:right;">
+                              <i></i>
+                  
+                       </span>
+                       <div style="clear:both"></div>
+                 </div>      
+                </a>
+            </li>
+			</volist>
+           
+        </ul>
+    </div>
+	<p class="m_taocan_tit">支付小费</p>
+    <div class="m_taocan_cont">
+        <ul class="u_taocan_items">
+            <li>
+            1.5元
+          </li>
+           
+        </ul>
+        <div style=" clear:both"></div>
+    </div>
+    <p class="m_taocan_tit">添加备注</p>
+    <div class="m_taocan_cont">
+        <ul class="u_taocan_items">
+            <li class="li_s3">
+            <input type="comment" name="comment" placeholder="填写备注" maxlength="50">
+          </li>
+           
+        </ul>
+        <div style=" clear:both"></div>
+    </div>
+	<div class="m_taocan_cont">
+        <ul class="u_taocan_items">
+            <li class="li_s6">
+            <input type="button" class="submit" value="提交订单" />
+			</li>
+           
+        </ul>
+        <div style=" clear:both"></div>
+    </div>   
+
+</div>
+</div>
+<form action="web_root/user/addOrder" id="form1" method="post">
+	<input type="hidden" name="service_id"/>
+	<input type="hidden" name="service_name"/>
+	<input type="hidden" name="restaurant_id"/>
+	<input type="hidden" name="restaurant_name"/>
+	<input type="hidden" name="shool_id"/>
+	<input type="hidden" name="name"/>
+	<input type="hidden" name="type"/>
+	<input type="hidden" name="mobile"/>
+	<input type="hidden" name="address"/>
+	<input type="hidden" name="comment"/>
+</form> 
+<!--/bodyer-->
+<script type="text/javascript" src="../Public/js/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/js/buyCar.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".submit").click(function(){
+		var service_id =$("input[name='service']:checked").val();
+		$("input[name=service_id]").val(service_id);
+		var service_name =$("input[name='service']:checked").attr("data-name");
+		$("input[name=service_name]").val(service_name);
+		var restaurant_id =$("input[name='restaurant']:checked").val();
+		$("input[name=restaurant_id]").val(restaurant_id);
+		var restaurant_name =$("input[name='restaurant']:checked").attr("data-name");
+		$("input[name=restaurant_name]").val(restaurant_name);
+		var shool_id =$(".boderDown").attr("data-id");
+		$("input[name=shool_id]").val(shool_id);
+		var name =$(".boderDown").attr("data-username");
+		$("input[name=name]").val(name);
+		var mobile =$(".boderDown").attr("data-mobile");
+		$("input[name=mobile]").val(mobile);
+		var type =$(".boderDown").attr("data-type");
+		$("input[name=type]").val(type);
+		var address =$(".boderDown").attr("data-name");
+		$("input[name=address]").val(address);
+		var comment =$("input[name=comment]").val();
+		$("input[name=comment]").val(comment);
+		
+		$("#form1").submit();
+		console.log(comment);
+		/*
+		$.post("addOrder",{
+						   service_id:service_id,
+						   service_name:service_name,
+						   restaurant_id:restaurant_id,
+						   restaurant_name:restaurant_name,
+						   shool_id:shool_id,
+						   name:name,
+						   mobile:mobile,
+						   address:address,
+						   comment:comment
+						   },
+		function(data){
+					console.log(data);
+					//window.location="index"
+		})
+		*/
+		
+	})
+	
+})
+</script>
+</body>
+</html>

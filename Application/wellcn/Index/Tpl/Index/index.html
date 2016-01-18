@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="www.frebsite.nl" />
+<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+
+<title>帮帮达一校园私人助理 - 手机版</title>
+
+<link type="text/css" rel="stylesheet" href="../Public/css/demo_index.css" />
+<link type="text/css" rel="stylesheet" href="../Public/dist/css/jquery.mmenu.all.css" />
+
+<link href="../Public/css/demo.css" type="text/css" rel="stylesheet" />
+<link href="../Public/css/layout3.0.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="../Public/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/dist/js/jquery.mmenu.min.all.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('nav#menu').mmenu({
+			extensions	: [ 'effect-slide-menu', 'pageshadow' ],
+			searchfield	: true,
+			counters	: true,
+			navbar 		: {
+				title		: '导航菜单'
+			},
+			navbars		: [
+				{
+					position	: 'top',
+					content		: [ 'searchfield' ]
+				}, {
+					position	: 'top',
+					content		: [
+						'prev',
+						'title',
+						'close'
+					]
+				}, {
+					position	: 'bottom',
+					content		: [
+						'<a href="http://www.baidu.com" target="_blank">百度搜索</a>'
+					]
+				}
+			]
+		});
+	});
+</script>
+<script>
+$(document).on("click",".obtain",function(){
+	var order_id = $(this).attr("data-id");
+		var obj =$(this).parents(".orderbody");
+		$.post("web_root/index/index/getOrder",{order_id:order_id},
+		function(data){
+			console.log(data);
+			if(data=='ok'){
+				alert('抢单成功!');
+				//obj.remove();
+				//console.log(obj);
+			}else{
+				alert('很遗憾,你来晚了!');
+			}
+			obj.remove();
+		})
+})
+/*
+$(function(){
+	//抢单js处理
+	$(".obtain").click(function(){
+		var order_id = $(this).attr("data-id");
+		var obj =$(this).parents(".orderbody");
+		$.post("web_root/index/index/getOrder",{order_id:order_id},
+		function(data){
+			console.log(data);
+			if(data=='ok'){
+				alert('抢单成功!');
+				//obj.remove();
+				//console.log(obj);
+			}else{
+				alert('很遗憾,你来晚了!');
+			}
+			obj.remove();
+		})
+		console.log(order_id);
+	})
+})*/
+</script>
+<script>
+//异步加载订单
+$(function(){
+	$(".loading").click(function(){
+		var obj1 =$(this);
+		var page =obj1.attr("data-page");
+		$.post("web_root/index/index/getOrderList",{page:page},function(obj){
+			var result =obj.result;//返回状态
+			if(result=='1'){
+				var data =obj.info;//返回信息
+				var page1 =obj.page;//返回信息
+				$(".u_taocan_items").append(data);
+				obj1.attr("data-page",page1);
+			}else{
+				$(".loading").hide();
+				$(".loading_end").show();
+			}
+		})
+	})
+})
+</script>
+</head>
+<body>
+	<div id="page">
+		<nav id="menu">
+			<ul>
+				<li><a href="web_root/index/index">首页</a></li>
+				<li><a href="#about">个人中心</a>
+					<ul>
+						<li><a href="web_root/index/userwx/myorders">我的订单</a></li>
+						<li><a href="web_root/index/userwx/myduty">我的任务</a></li>
+						<li><a href="web_root/index/userwx/myAddress">地址管理</a></li>
+						<li><a href="web_root/index/userwx/index">个人信息</a></li>
+					</ul>
+				</li>
+				<!--
+				<li><a href="#about">地区选择</a>
+					<ul>
+					<volist name="school" id="vo">
+						<li><a href="web_root/index/index?school_id={$vo.id}">{$vo.title}</a></li>
+					</volist>
+					</ul>
+				</li>
+				-->
+				<li><a href="web_root/index/user/addOrderIndex">我要下单</a></li>
+			</ul>
+		</nav>
+		<div class="header">
+			<a href="#menu"></a>
+			帮帮达
+		</div>
+	</div>
+<div class="oRderBodyer_Three0">
+  <div class="chooseBodyer_wrap" style="width:95%">
+    <p class="m_taocan_tit">订单列表</p>
+    <div class="m_taocan_cont">
+        <ul class="u_taocan_items">
+			<volist name="orderlist" id="vo">
+			<li style="margin-bottom:0%;width:100%;" class="orderbody">
+				<a class="LiBgImg-8 boderUp" style="padding: 0.6%;">
+				<div style=" width:84%; padding-left:16%">
+                       <span class="u_taocan_item_tit" style=" width:45%;overflow:hidden;">{$vo.user_name}
+                       </span> 
+					   <if condition="$is_available eq 1">					   
+                       <span class="u_taocan_item_price2" style=" width:30%;text-align:right;">
+					   <em style=" background-color:#448aca; padding:0 5%; font-size:12px;color:#fff;">备:</em>       
+                                  <i data-id="{$vo.id}" class="obtain">抢单</i>
+                       </span>
+					   </if>
+                       <span class="u_taocan_item_cont" style="width:100%;overflow:hidden;">商家:{$vo.restaurant_name}</span>
+                       <span class="u_taocan_item_cont" style="width:100%;overflow:hidden;">地址:{$vo.address}</span>
+					   <span class="u_taocan_item_cont" style=" width:100%;overflow:hidden;">备注:{$vo.comment}</span>
+					   <div style="clear:both"></div>
+                 </div>      
+                </a>
+            </li>
+			</volist>
+           
+        </ul>
+		<div style="clear:both"></div>
+	<div class="loading" data-page="1" style="text-align:center;margin:0 auto;border: 1px solid #C8C8C8;height:35px;"><span>加载更多>></span></div>
+	<div class="loading_end" style="display:none;text-align:center;margin:0 auto;"><span>没有更多数据</span></div>
+    </div>
+   </div>
+</div>
+</body>
+</html>
